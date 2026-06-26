@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStore — Loja de Eletrônicos</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --ink:     #0d0f14;
+      --ink2:    #1c1f2b;
+      --surface: #f4f5f8;
+      --accent:  #3b6ef8;
+      --accent2: #6c3bef;
+      --gold:    #f5a623;
+      --muted:   #6b7280;
+      --border:  #e2e5ee;
+      --radius:  14px;
+      --ff-head: 'Space Grotesk', sans-serif;
+      --ff-body: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--ff-body);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(13,15,20,.92) !important;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .navbar-brand {
+      font-family: var(--ff-head);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff !important;
+      letter-spacing: -.3px;
+    }
+
+    .navbar-brand span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .navbar-nav .nav-link {
+      color: rgba(255,255,255,.70) !important;
+      font-size: .88rem;
+      font-weight: 500;
+      transition: color .2s;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active { color: #fff !important; }
+
+    .btn-nav-cta {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: opacity .2s;
+    }
+
+    .btn-nav-cta:hover { opacity: .88; color: #fff !important; }
+
+    .navbar-toggler {
+      border: none;
+      outline: none;
+      box-shadow: none !important;
+    }
+
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+
+    /* ── HERO ── */
+    #home {
+      background: var(--ink);
+      min-height: 580px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 80% at 75% 40%, rgba(59,110,248,.18) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 20% 70%, rgba(108,59,239,.14) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(59,110,248,.15);
+      border: 1px solid rgba(59,110,248,.30);
+      color: #8baeff;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 99px;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #8baeff;
+      flex-shrink: 0;
+    }
+
+    .hero-title {
+      font-family: var(--ff-head);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      letter-spacing: -.5px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--accent), #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,.60);
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .92rem;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: 0 4px 18px rgba(59,110,248,.4);
+    }
+
+    .btn-primary-custom:hover {
+      color: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(59,110,248,.5);
+    }
+
+    .btn-ghost-custom {
+      background: rgba(255,255,255,.08);
+      color: rgba(255,255,255,.85);
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: .92rem;
+      border: 1px solid rgba(255,255,255,.14);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background .2s;
+    }
+
+    .btn-ghost-custom:hover {
+      color: #fff;
+      background: rgba(255,255,255,.14);
+    }
+
+    .hero-stats {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 28px;
+    }
+
+    .hero-stat-num {
+      font-family: var(--ff-head);
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .hero-stat-label {
+      font-size: .78rem;
+      color: rgba(255,255,255,.45);
+      margin-top: 2px;
+    }
+
+    /* hero visual cards */
+    .hero-visual-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(8px);
+      transition: transform .3s;
+    }
+
+    .hero-card:hover { transform: translateY(-4px); }
+    .hero-card:nth-child(2) { margin-top: 28px; }
+    .hero-card:nth-child(4) { margin-top: -28px; }
+
+    .hero-card-icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .hero-card-name { font-weight: 600; color: #fff; font-size: .88rem; margin-bottom: 4px; }
+    .hero-card-price { font-family: var(--ff-head); color: var(--gold); font-weight: 700; font-size: .95rem; }
+
+    /* ── FEATURES STRIP ── */
+    .features-strip {
+      background: var(--ink2);
+      padding: 56px 0;
+    }
+
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+
+    .feature-title {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      color: #fff;
+      font-size: .95rem;
+      margin-bottom: 6px;
+    }
+
+    .feature-text {
+      color: rgba(255,255,255,.45);
+      font-size: .80rem;
+      line-height: 1.5;
+    }
+
+    /* ── SECTION COMMONS ── */
+    .section-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--ff-head);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.3px;
+      margin-bottom: 8px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    /* ── CATEGORY PILLS ── */
+    .cat-pill {
+      padding: 7px 18px;
+      border-radius: 99px;
+      font-size: .82rem;
+      font-weight: 600;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      background: #fff;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .cat-pill.active,
+    .cat-pill:hover {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+
+    /* ── PRODUCT CARDS ── */
+    .prod-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      cursor: pointer;
+      height: 100%;
+    }
+
+    .prod-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 48px rgba(0,0,0,.14);
+      border-color: rgba(59,110,248,.25);
+    }
+
+    .prod-card__img-wrap { position: relative; overflow: hidden; }
+
+    .prod-card__img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      transition: transform .35s;
+      display: block;
+    }
+
+    .prod-card:hover .prod-card__img { transform: scale(1.04); }
+
+    .prod-card__badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--gold);
+      color: var(--ink);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .prod-card__body {
+      padding: 18px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .prod-card__name {
+      font-family: var(--ff-head);
+      font-weight: 700;
+      font-size: .97rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .prod-card__desc {
+      font-size: .81rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 14px;
+    }
+
+    .prod-card__price {
+      font-family: var(--ff-head);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .prod-card__btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      padding: 9px 16px;
+      border-radius: 9px;
+      font-size: .8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
+      white-space: nowrap;
+    }
+
+    .prod-card__btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 14px rgba(59,110,248,.4);
+    }
+
+    /* ── TESTIMONIALS ── */
+    .testi-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      position: relative;
+      height: 100%;
+    }
+
+    .testi-card::before {
+      content: '"';
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--accent);
+      opacity: .15;
+    }
+
+    .testi-stars {
+      color: var(--gold);
+      font-size: .85rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .testi-text {
+      font-size: .90rem;
+      color: var(--ink);
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .testi-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .88rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .testi-name { font-weight: 700; font-size: .88rem; color: var(--ink); }
+    .testi-city { font-size: .77rem; color: var(--muted); }
+
+    /* ── NEWSLETTER ── */
+    .newsletter-strip {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      padding: 64px 0;
+    }
+
+    .newsletter-strip h2 {
+      font-family: var(--ff-head);
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .newsletter-strip p { color: rgba(255,255,255,.75); font-size: .93rem; }
+
+    .newsletter-input {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: 10px;
+      border: none;
+      font-size: .90rem;
+      outline: none;
+      background: rgba(255,255,255,.18);
+      color: #fff;
+      font-family: var(--ff-body);
+    }
+
+    .newsletter-input::placeholder { color: rgba(255,255,255,.55); }
+    .newsletter-input:focus { background: rgba(255,255,255,.25); outline: none; box-shadow: none; }
+
+    .newsletter-btn {
+      padding: 13px 22px;
+      background: #fff;
+      color: var(--accent2);
+      font-weight: 700;
+      font-size: .88rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: transform .2s;
+      font-family: var(--ff-body);
+    }
+
+    .newsletter-btn:hover { transform: scale(1.04); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 56px 0 32px;
+    }
+
+    .footer-logo {
+      font-family: var(--ff-head);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+    }
+
+    .footer-logo span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .footer-desc {
+      font-size: .83rem;
+      color: rgba(255,255,255,.40);
+      line-height: 1.7;
+      max-width: 260px;
+    }
+
+    .footer-social {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      background: rgba(255,255,255,.08);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .85rem;
+      color: rgba(255,255,255,.60);
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .footer-social:hover { background: rgba(255,255,255,.16); color: #fff; }
+
+    .footer-col-title {
+      font-weight: 700;
+      color: #fff;
+      font-size: .85rem;
+      margin-bottom: 16px;
+    }
+
+    .footer-col a {
+      font-size: .82rem;
+      color: rgba(255,255,255,.40);
+      text-decoration: none;
+      transition: color .2s;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .footer-col a:hover { color: rgba(255,255,255,.85); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 24px;
+      margin-top: 40px;
+    }
+
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.28); }
+
+    .footer-badge {
+      background: rgba(255,255,255,.07);
+      color: rgba(255,255,255,.35);
+      font-size: .70rem;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* ── MODAL ── */
+    .modal-overlay-custom {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.65);
+      backdrop-filter: blur(6px);
+      z-index: 1050;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+
+    .modal-overlay-custom.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: #fff;
+      border-radius: 18px;
+      max-width: 860px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 18px 48px rgba(0,0,0,.25);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: translateY(20px);
+      transition: transform .3s;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay-custom.open .modal-box { transform: translateY(0); }
+
+    .modal-box img {
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .modal-body-custom {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .modal-name {
+      font-family: var(--ff-head);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .modal-desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+
+    .modal-specs {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      margin-bottom: 20px;
+    }
+
+    .modal-spec {
+      display: flex;
+      gap: 10px;
+      padding: 7px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+
+    .modal-spec::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .modal-price {
+      font-family: var(--ff-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .modal-add {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: .95rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: var(--ff-body);
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .modal-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(59,110,248,.4);
+    }
+
+    /* ── TOAST ── */
+    .toast-custom {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: var(--ink);
+      color: #fff;
+      padding: 14px 22px;
+      border-radius: 12px;
+      font-size: .88rem;
+      font-weight: 600;
+      box-shadow: 0 18px 48px rgba(0,0,0,.14);
+      z-index: 2000;
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      pointer-events: none;
+    }
+
+    .toast-custom.show { transform: translateY(0); opacity: 1; }
+
+    /* ── SCROLL REVEAL ── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+
+    [data-reveal].visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE OVERRIDES ── */
+    @media (max-width: 768px) {
+      .modal-box { grid-template-columns: 1fr; }
+      .modal-box img { height: 220px; min-height: unset; }
+      .hero-visual-grid { display: none; }
+      .toast-custom { right: 16px; left: 16px; bottom: 20px; font-size: .82rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+      [data-reveal] { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top" id="navbar">
+  <div class="container">
+    <a class="navbar-brand" href="#home">⚡ Tech<span>Store</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Abrir menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navLinks">
+      <ul class="navbar-nav gap-lg-3 align-items-lg-center py-3 py-lg-0">
+        <li class="nav-item"><a class="nav-link active" href="#home">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#produtos">Produtos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#depoimentos">Depoimentos</a></li>
+        <li class="nav-item mt-2 mt-lg-0"><a class="nav-link btn-nav-cta" href="#newsletter">Ofertas</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section id="home" class="py-5">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="container position-relative" style="z-index:2; padding-top: 60px; padding-bottom: 60px;">
+    <div class="row align-items-center g-5">
+
+      <!-- Left: text -->
+      <div class="col-lg-6">
+        <div class="hero-eyebrow mb-4">Novidades 2025</div>
+        <h1 class="hero-title mb-3">Tecnologia que<br><em>Inspira</em> o Futuro</h1>
+        <p class="hero-subtitle mb-4">Os melhores eletrônicos selecionados com entrega rápida para todo o Brasil e garantia de satisfação.</p>
+        <div class="d-flex flex-wrap gap-3 mb-5">
+          <a href="#produtos" class="btn-primary-custom">Ver Produtos</a>
+          <a href="#depoimentos" class="btn-ghost-custom">Depoimentos</a>
+        </div>
+        <div class="hero-stats d-flex flex-wrap gap-4 mt-4 pt-4">
+          <div>
+            <div class="hero-stat-num">+12K</div>
+            <div class="hero-stat-label">Clientes satisfeitos</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">48h</div>
+            <div class="hero-stat-label">Entrega expressa</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">5★</div>
+            <div class="hero-stat-label">Avaliação média</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: visual cards -->
+      <div class="col-lg-6 d-none d-lg-block" aria-hidden="true">
+        <div class="hero-visual-grid">
+          <div class="hero-card">
+            <div class="hero-card-icon">💻</div>
+            <div class="hero-card-name">Notebook Pro X</div>
+            <div class="hero-card-price">R$ 3.499</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">📱</div>
+            <div class="hero-card-name">Smartphone Z Ultra</div>
+            <div class="hero-card-price">R$ 2.199</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">🖥️</div>
+            <div class="hero-card-name">Monitor 4K 27"</div>
+            <div class="hero-card-price">R$ 2.799</div>
+          </div>
+          <div class="hero-card">
+            <div class="hero-card-icon">⌚</div>
+            <div class="hero-card-name">Smartwatch Series 5</div>
+            <div class="hero-card-price">R$ 1.099</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES STRIP ===== -->
+<div class="features-strip">
+  <div class="container">
+    <div class="row g-4 text-center">
+      <div class="col-6 col-md-3" data-reveal>
+        <div class="feature-icon">🚚</div>
+        <div class="feature-title">Entrega Rápida</div>
+        <div class="feature-text">Frete expresso em até 48h para todo o Brasil</div>
+      </div>
+      <div class="col-6 col-md-3" data-reveal>
+        <div class="feature-icon">🛡️</div>
+        <div class="feature-title">Garantia Total</div>
+        <div class="feature-text">12 meses de garantia em todos os produtos</div>
+      </div>
+      <div class="col-6 col-md-3" data-reveal>
+        <div class="feature-icon">🔒</div>
+        <div class="feature-title">Pagamento Seguro</div>
+        <div class="feature-text">PIX, cartão e boleto com ambiente 100% criptografado</div>
+      </div>
+      <div class="col-6 col-md-3" data-reveal>
+        <div class="feature-icon">↩️</div>
+        <div class="feature-title">Troca Fácil</div>
+        <div class="feature-text">Devolução sem burocracia em até 30 dias</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== PRODUTOS ===== -->
+<section class="py-5" id="produtos" style="background: var(--surface);">
+  <div class="container">
+    <div class="mb-4" data-reveal>
+      <div class="section-label">Catálogo</div>
+      <h2 class="section-title">Nossos Produtos</h2>
+      <p class="section-sub">Equipamentos selecionados para trabalho, estudos e entretenimento.</p>
+    </div>
+
+    <!-- Category pills -->
+    <div class="d-flex flex-wrap gap-2 mb-4" data-reveal>
+      <button class="cat-pill active" onclick="filterCat(this,'todos')">Todos</button>
+      <button class="cat-pill" onclick="filterCat(this,'notebook')">Notebooks</button>
+      <button class="cat-pill" onclick="filterCat(this,'smartphone')">Smartphones</button>
+      <button class="cat-pill" onclick="filterCat(this,'audio')">Áudio</button>
+      <button class="cat-pill" onclick="filterCat(this,'wearable')">Wearables</button>
+      <button class="cat-pill" onclick="filterCat(this,'monitor')">Monitores</button>
+      <button class="cat-pill" onclick="filterCat(this,'acessorio')">Acessórios</button>
+    </div>
+
+    <!-- Product grid -->
+    <div class="row g-3" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ===== DEPOIMENTOS ===== -->
+<section class="py-5" id="depoimentos">
+  <div class="container">
+    <div class="mb-4" data-reveal>
+      <div class="section-label">Clientes</div>
+      <h2 class="section-title">O que dizem sobre a gente</h2>
+      <p class="section-sub">Milhares de clientes satisfeitos em todo o Brasil.</p>
+    </div>
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Comprei o Notebook Pro X e superou todas as expectativas. Entrega rápida e produto impecável! Já é o meu segundo pedido na TechStore."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#3b6ef8,#6c3bef)">LF</div>
+            <div>
+              <div class="testi-name">Lucas Ferreira</div>
+              <div class="testi-city">Brasília, DF</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"O atendimento foi excelente e o Smartwatch chegou em perfeito estado. Embalagem super cuidadosa e chegou antes do prazo. Recomendo demais!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#f5a623,#e07a5f)">MC</div>
+            <div>
+              <div class="testi-name">Mariana Costa</div>
+              <div class="testi-city">São Paulo, SP</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Melhor custo-benefício que encontrei online. O fone wireless é incrível para home office, cancelamento de ruído de verdade. Nota 10!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#10b981,#0f3460)">RM</div>
+            <div>
+              <div class="testi-name">Rafael Mendes</div>
+              <div class="testi-city">Goiânia, GO</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"O Monitor 4K chegou bem embalado e a qualidade de imagem é absurda. Vale cada centavo para quem trabalha com design como eu."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#6c3bef,#3b6ef8)">AP</div>
+            <div>
+              <div class="testi-name">Ana Paula Lima</div>
+              <div class="testi-city">Curitiba, PR</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Mouse Gamer 25K chegou em 2 dias, sensor preciso e RGB lindo. Suporte me ajudou na configuração. Já virei cliente fiel da TechStore."</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#e07a5f,#f5a623)">GS</div>
+            <div>
+              <div class="testi-name">Gabriel Souza</div>
+              <div class="testi-city">Porto Alegre, RS</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4" data-reveal>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">"Tablet Air perfeito para a minha filha usar na escola. Leve, rápido e a compatibilidade com a Stylus é show. Comprarei mais coisas aqui!"</p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="testi-avatar" style="background:linear-gradient(135deg,#0d0f14,#3b6ef8)">CR</div>
+            <div>
+              <div class="testi-name">Carla Rodrigues</div>
+              <div class="testi-city">Fortaleza, CE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== NEWSLETTER ===== -->
+<div class="newsletter-strip" id="newsletter">
+  <div class="container text-center" data-reveal>
+    <h2 class="mb-2">Fique por dentro das ofertas</h2>
+    <p class="mb-4">Cadastre seu e-mail e receba descontos exclusivos antes de todo mundo.</p>
+    <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center mx-auto" style="max-width:440px">
+      <input class="newsletter-input" type="email" placeholder="seu@email.com" id="emailInput" />
+      <button class="newsletter-btn" onclick="subscribeEmail()">Quero descontos</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="container">
+    <div class="row g-4 pb-4" style="border-bottom:1px solid rgba(255,255,255,.08)">
+      <div class="col-lg-4">
+        <div class="footer-logo">⚡ Tech<span>Store</span></div>
+        <p class="footer-desc mb-3">Tecnologia de qualidade com entrega rápida e atendimento de excelência para todo o Brasil.</p>
+        <div class="d-flex gap-2">
+          <a class="footer-social" href="#" aria-label="Instagram">📷</a>
+          <a class="footer-social" href="#" aria-label="Facebook">📘</a>
+          <a class="footer-social" href="#" aria-label="WhatsApp">💬</a>
+          <a class="footer-social" href="#" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2 offset-lg-1">
+        <div class="footer-col-title">Produtos</div>
+        <div class="footer-col">
+          <a href="#">Notebooks</a>
+          <a href="#">Smartphones</a>
+          <a href="#">Monitores</a>
+          <a href="#">Áudio</a>
+          <a href="#">Wearables</a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-col-title">Atendimento</div>
+        <div class="footer-col">
+          <a href="#">Central de Ajuda</a>
+          <a href="#">Trocas e Devoluções</a>
+          <a href="#">Rastrear Pedido</a>
+          <a href="#">Fale Conosco</a>
+          <a href="#">WhatsApp</a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-col-title">Empresa</div>
+        <div class="footer-col">
+          <a href="#">Sobre Nós</a>
+          <a href="#">Blog Tech</a>
+          <a href="#">Trabalhe Conosco</a>
+          <a href="#">Privacidade</a>
+          <a href="#">Termos de Uso</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center gap-3">
+      <span class="footer-copy">© 2025 TechStore. Todos os direitos reservados. CNPJ 00.000.000/0001-00</span>
+      <div class="d-flex gap-2 flex-wrap">
+        <span class="footer-badge">🔒 SSL</span>
+        <span class="footer-badge">✅ LGPD</span>
+        <span class="footer-badge">📦 Frete Seguro</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div class="modal-overlay-custom" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <img src="" alt="" id="modalImg" onerror="this.onerror=null;this.src='https://placehold.co/600x400/1c1f2b/8baeff?text=Produto'" />
+    <div class="modal-body-custom">
+      <div>
+        <p class="section-label" id="modalCat"></p>
+        <h2 class="modal-name" id="modalName"></h2>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-specs" id="modalSpecs"></div>
+      </div>
+      <div>
+        <div class="modal-price" id="modalPrice"></div>
+        <button class="modal-add" onclick="addToCart()">Adicionar ao Carrinho 🛒</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-custom" id="toast">🛒 Produto adicionado ao carrinho!</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+// ===== DATA =====
+const produtos = [
+  {
+    id: 1, cat: 'notebook',
+    nome: 'Notebook Pro X',
+    desc: 'Intel Core i7, 16GB RAM, SSD 512GB. Perfeito para trabalho e estudos.',
+    descLonga: 'O Notebook Pro X foi projetado para quem não abre mão de desempenho. Processador Intel Core i7 de 11ª geração, 16GB de memória RAM DDR4 e SSD NVMe de 512GB garantem inicialização rápida e multitarefa fluida.',
+    preco: 'R$ 3.499,00',
+    img: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=600&q=80',
+    badge: 'Destaque',
+    specs: ['Processador: Intel Core i7', 'Memória: 16GB DDR4', 'Armazenamento: SSD 512GB NVMe', 'Tela: 15.6" Full HD IPS', 'Bateria: até 10 horas', 'Sistema: Windows 11 Home']
+  },
+  {
+    id: 2, cat: 'smartphone',
+    nome: 'Smartphone Z Ultra',
+    desc: 'Tela AMOLED 6.7", câmera 200MP, bateria de 5000mAh.',
+    descLonga: 'Com câmera principal de 200MP e zoom óptico 10x, o Z Ultra redefine a fotografia mobile. Display AMOLED de 6.7" com 120Hz entrega imagens vibrantes e responsividade impressionante.',
+    preco: 'R$ 2.199,00',
+    img: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&q=80',
+    badge: 'Novo',
+    specs: ['Tela: AMOLED 6.7" 120Hz', 'Câmera: 200MP + 12MP ultrawide', 'Processador: Snapdragon 8 Gen 2', 'Bateria: 5000mAh + carregamento 65W', 'RAM: 12GB | Storage: 256GB', '5G integrado']
+  },
+  {
+    id: 3, cat: 'audio',
+    nome: 'Fone Wireless NC',
+    desc: 'Cancelamento de ruído ativo, 30h de bateria, conector USB-C.',
+    descLonga: 'Tecnologia de cancelamento de ruído ativo para isolar seu mundo externo. Com 30 horas de autonomia e áudio Hi-Res, é o companheiro ideal para trabalho e viagens.',
+    preco: 'R$ 799,00',
+    img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80',
+    badge: null,
+    specs: ['ANC: cancelamento ativo de ruído', 'Autonomia: 30h (ANC ligado)', 'Codec: AAC / SBC / aptX', 'Conexão: Bluetooth 5.3', 'Carregamento: USB-C (10min = 3h)', 'Peso: 250g']
+  },
+  {
+    id: 4, cat: 'wearable',
+    nome: 'Smartwatch Series 5',
+    desc: 'Monitor cardíaco, GPS integrado, resistente à água IPX8.',
+    descLonga: 'Monitore sua saúde com precisão. O Series 5 conta com sensor de frequência cardíaca contínua, SpO2, GPS duplo-frequência e mais de 100 modos esportivos.',
+    preco: 'R$ 1.099,00',
+    img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80',
+    badge: null,
+    specs: ['GPS: dual frequency', 'Saúde: FC, SpO2, estresse', 'Resistência: IPX8 (50m)', 'Tela: AMOLED Always-On', 'Bateria: 14 dias (modo normal)', 'Compatível: Android e iOS']
+  },
+  {
+    id: 5, cat: 'monitor',
+    nome: 'Monitor 4K 27"',
+    desc: 'Resolução 3840×2160, painel IPS, taxa de atualização 144Hz.',
+    descLonga: 'Cores precisas com cobertura de 98% DCI-P3 e calibração de fábrica. Ideal para designers, editores e gamers que exigem o máximo da tela.',
+    preco: 'R$ 2.799,00',
+    img: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&q=80',
+    badge: 'Pro',
+    specs: ['Resolução: 3840×2160 (4K)', 'Painel: IPS 27"', 'Taxa: 144Hz | Resp: 1ms GtG', 'HDR: DisplayHDR 400', 'Entradas: 2× HDMI 2.1 + DP 1.4', 'USB-C com 65W de carga']
+  },
+  {
+    id: 6, cat: 'acessorio',
+    nome: 'Teclado Mecânico RGB',
+    desc: 'Switches Red silenciosos, iluminação RGB por tecla, TKL compacto.',
+    descLonga: 'Switches Red lineares e silenciosos tornam a digitação suave e agradável. Iluminação RGB por tecla com 16 milhões de cores e software de personalização incluso.',
+    preco: 'R$ 449,00',
+    img: 'https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&q=80',
+    badge: null,
+    specs: ['Layout: TKL (87 teclas)', 'Switch: Red linear silencioso', 'RGB: por tecla, 16M cores', 'Anti-ghosting: 100% NKRO', 'Conexão: USB-C destacável', 'Compatível: Windows / Mac']
+  },
+  {
+    id: 7, cat: 'acessorio',
+    nome: 'Tablet Air 10"',
+    desc: 'Tela 2K, 8GB RAM, 256GB, compatível com caneta stylus.',
+    descLonga: 'Fino, leve e poderoso. O Tablet Air combina tela 2K com processador octa-core e suporte à caneta stylus para criatividade e produtividade onde você estiver.',
+    preco: 'R$ 1.599,00',
+    img: 'https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?w=600&q=80',
+    badge: null,
+    specs: ['Tela: 10" 2K (2000×1200)', 'Processador: Octa-core 2.4GHz', 'RAM: 8GB | Storage: 256GB', 'Bateria: 8000mAh', 'Compatível com Stylus Pen', 'Android 14 | Wi-Fi 6']
+  },
+  {
+    id: 8, cat: 'acessorio',
+    nome: 'Mouse Gamer 25K',
+    desc: 'Sensor óptico 25.600 DPI, 8 botões programáveis, RGB.',
+    descLonga: 'Sensor óptico de 25.600 DPI com rastreamento de 650 IPS para precisão máxima em qualquer superfície. Oito botões programáveis e RGB personalizável.',
+    preco: 'R$ 299,00',
+    img: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=600&q=80',
+    badge: 'Gamer',
+    specs: ['Sensor: óptico 25.600 DPI', 'Botões: 8 programáveis', 'Polling rate: 1000Hz', 'RGB: 16 zonas independentes', 'Peso: ajustável 69–95g', 'Cabo: trançado, 1.8m']
+  }
+];
+
+const catLabels = {
+  notebook: 'Notebook', smartphone: 'Smartphone', audio: 'Áudio',
+  wearable: 'Wearable', monitor: 'Monitor', acessorio: 'Acessório'
+};
+
+let activeProd = null;
+
+// ===== RENDER CARDS =====
+function renderCards(list) {
+  const grid = document.getElementById('productGrid');
+  grid.innerHTML = list.map(p => `
+    <div class="col-6 col-md-4 col-xl-3">
+      <div class="prod-card" onclick="openModal(${p.id})" data-reveal>
+        <div class="prod-card__img-wrap">
+          <img class="prod-card__img" src="${p.img}" alt="${p.nome}" loading="lazy"
+            onerror="this.onerror=null;this.src='https://placehold.co/600x400/1c1f2b/8baeff?text='+encodeURIComponent(this.alt)" />
+          ${p.badge ? `<span class="prod-card__badge">${p.badge}</span>` : ''}
+        </div>
+        <div class="prod-card__body">
+          <div class="prod-card__name">${p.nome}</div>
+          <p class="prod-card__desc">${p.desc}</p>
+          <div class="d-flex align-items-center justify-content-between gap-2 flex-wrap">
+            <span class="prod-card__price">${p.preco}</span>
+            <button class="prod-card__btn">Ver Detalhes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  observeReveal();
+}
+
+// ===== FILTER =====
+function filterCat(btn, cat) {
+  document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  const list = cat === 'todos' ? produtos : produtos.filter(p => p.cat === cat);
+  renderCards(list);
+}
+
+// ===== MODAL =====
+function openModal(id) {
+  activeProd = produtos.find(p => p.id === id);
+  if (!activeProd) return;
+  document.getElementById('modalImg').src    = activeProd.img;
+  document.getElementById('modalImg').alt    = activeProd.nome;
+  document.getElementById('modalCat').textContent   = catLabels[activeProd.cat] || '';
+  document.getElementById('modalName').textContent  = activeProd.nome;
+  document.getElementById('modalDesc').textContent  = activeProd.descLonga;
+  document.getElementById('modalPrice').textContent = activeProd.preco;
+  document.getElementById('modalSpecs').innerHTML   =
+    activeProd.specs.map(s => `<div class="modal-spec">${s}</div>`).join('');
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('modalOverlay')) return;
+  document.getElementById('modalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ===== CART =====
+function addToCart() {
+  closeModal();
+  const toast = document.getElementById('toast');
+  toast.textContent = `🛒 "${activeProd?.nome}" adicionado ao carrinho!`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// ===== NEWSLETTER =====
+function subscribeEmail() {
+  const input = document.getElementById('emailInput');
+  const val = input.value.trim();
+  if (!val || !val.includes('@')) {
+    input.style.outline = '2px solid #f87171';
+    setTimeout(() => input.style.outline = '', 1500);
+    return;
+  }
+  input.value = '';
+  const toast = document.getElementById('toast');
+  toast.textContent = '🎉 Cadastrado! Você receberá nossas ofertas em breve.';
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+// ===== SCROLL REVEAL =====
+function observeReveal() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+}
+
+// ===== ACTIVE NAV ON SCROLL =====
+const sections = document.querySelectorAll('section[id], div[id="newsletter"]');
+const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+  navLinks.forEach(a => {
+    a.classList.remove('active');
+    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+  });
+}, { passive: true });
+
+// ===== INIT =====
+renderCards(produtos);
+observeReveal();
+</script>
+</body>
+</html>
